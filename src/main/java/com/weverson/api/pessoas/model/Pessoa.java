@@ -6,24 +6,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long IdPessoa;
     private String nome;
-    private Date data;
-    private Endereco endereco;
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private Date dataNascimento;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	// @JsonManagedReference	
+	// private List<Endereco> enderecoList;
+    
 
     public String getNome() {
         return nome;
@@ -33,20 +36,27 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public Date getData() {
-        return data;
+
+
+    
+
+    public Long getIdPessoa() {
+        return IdPessoa;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setIdPessoa(Long idPessoa) {
+        IdPessoa = idPessoa;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
+
+   
+
 
 }

@@ -1,19 +1,41 @@
 package com.weverson.api.pessoas.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class Endereco {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long IdEndereco;
+
+    
+    // @ManyToOne(cascade = CascadeType.ALL)
+	// private Usuario usuario;
+
+
     private String cep;
     private String logradouro;
     private String numero;
     private String cidade;
+    private Boolean enderecoPrincipal;
+
+    
+
+    public Boolean getEnderecoPrincipal() {
+        return enderecoPrincipal;
+    }
+
+    public void setEnderecoPrincipal(Boolean enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
+    }
 
     public String getCep() {
         return cep;
@@ -45,6 +67,14 @@ public class Endereco {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public Long getIdEndereco() {
+        return IdEndereco;
+    }
+
+    public void setIdEndereco(Long idEndereco) {
+        IdEndereco = idEndereco;
     }
 
 }
