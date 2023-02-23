@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -27,14 +28,15 @@ public class Endereco {
     private String cidade;
     private Boolean enderecoPrincipal;
 
-    
+    @ManyToOne
+    private Pessoa pessoa;
 
-    public Boolean getEnderecoPrincipal() {
-        return enderecoPrincipal;
+    public Long getIdEndereco() {
+        return IdEndereco;
     }
 
-    public void setEnderecoPrincipal(Boolean enderecoPrincipal) {
-        this.enderecoPrincipal = enderecoPrincipal;
+    public void setIdEndereco(Long idEndereco) {
+        IdEndereco = idEndereco;
     }
 
     public String getCep() {
@@ -69,12 +71,22 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    public Long getIdEndereco() {
-        return IdEndereco;
+    public Boolean getEnderecoPrincipal() {
+        return enderecoPrincipal;
     }
 
-    public void setIdEndereco(Long idEndereco) {
-        IdEndereco = idEndereco;
+    public void setEnderecoPrincipal(Boolean enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
     }
 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    
+    
 }

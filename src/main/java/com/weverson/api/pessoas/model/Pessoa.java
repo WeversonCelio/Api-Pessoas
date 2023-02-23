@@ -1,15 +1,13 @@
 package com.weverson.api.pessoas.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -19,44 +17,53 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long IdPessoa;
     private String nome;
-    @JsonFormat(pattern="dd-MM-yyyy")
     private Date dataNascimento;
 
    
-    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	// @JsonManagedReference	
-	// private List<Endereco> enderecoList;
-    
+    @OneToMany
+	private List<Endereco> enderecos;
+
+
+    public Long getIdPessoa() {
+        return IdPessoa;
+    }
+
+
+    public void setIdPessoa(Long idPessoa) {
+        IdPessoa = idPessoa;
+    }
+
 
     public String getNome() {
         return nome;
     }
+
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
 
-
-    
-
-    public Long getIdPessoa() {
-        return IdPessoa;
-    }
-
-    public void setIdPessoa(Long idPessoa) {
-        IdPessoa = idPessoa;
-    }
-
     public Date getDataNascimento() {
         return dataNascimento;
     }
+
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-   
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+    
+
 
 
 }

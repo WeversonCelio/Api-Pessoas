@@ -8,16 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.weverson.api.pessoas.model.Endereco;
+import com.weverson.api.pessoas.model.EnderecoRepository;
 import com.weverson.api.pessoas.model.Pessoa;
 import com.weverson.api.pessoas.model.PessoaRepository;
 import com.weverson.api.pessoas.service.PessoaService;
+
+import net.bytebuddy.asm.Advice.Return;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
-    // @Autowired
-    // private EnderecoRepository enderecoRepository;
+     @Autowired
+     private EnderecoRepository enderecoRepository;
 
     @Override
     public void criarPessoa(Pessoa pessoa) {
@@ -42,21 +45,14 @@ public class PessoaServiceImpl implements PessoaService {
         return pessoaRepository.findAll();
     }
 
+    
     @Override
     public Pessoa consultarPessoaPorId(Long idPessoa) {
-        return pessoaRepository.findById(idPessoa).get();
+        Pessoa pessoa = pessoaRepository.findById(idPessoa).get();
+        return pessoa;
     }
 
-    @Override
-    public Pessoa consultarPessoaPorNome(String nome) {
-        Iterator<Pessoa> iterator = buscarTodos().iterator();
-        while (iterator.hasNext()) {
-            if ((nome.compareToIgnoreCase(iterator.next().getNome())) == 0) {
-                return iterator.next();
-            }
-        }
-        return null;
-    }
+  
 
     @Override
     public void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco) {

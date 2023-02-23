@@ -1,6 +1,5 @@
 package com.weverson.api.pessoas.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.weverson.api.pessoas.model.Pessoa;
 import com.weverson.api.pessoas.service.PessoaService;
 
+// * Criar uma pessoa
+// * Editar uma pessoa
+// * Consultar uma pessoa
+// * Listar pessoas
+// * Criar endereço para pessoa
+// * Listar endereços da pessoa
+// * Poder informar qual endereço é o principal da pessoa  
+
 @RestController
 @RequestMapping("pessoas")
 public class PessoaRestController {
@@ -21,23 +28,36 @@ public class PessoaRestController {
     @Autowired
     private PessoaService pessoaService;
 
-    @GetMapping
-    public ResponseEntity<Iterable<Pessoa>> buscarTodos(){
-        return ResponseEntity.ok(pessoaService.buscarTodos());
-    }
-
+    // public void criarPessoa(Pessoa pessoa) {
     @PostMapping
-    public ResponseEntity<Pessoa> criarPessoa(@RequestBody Pessoa pessoa){
+    public ResponseEntity<Pessoa> criarPessoa(@RequestBody Pessoa pessoa) {
         pessoaService.criarPessoa(pessoa);
         return ResponseEntity.ok(pessoa);
     }
+
+    // public void EditarPessoa(Pessoa pessoa, Long idPessoa) {
     @PutMapping("/{idPessoa}")
-    public ResponseEntity<Pessoa> EditarPessoa(@PathVariable Long idPessoa, @RequestBody Pessoa pessoa){
+    public ResponseEntity<Pessoa> EditarPessoa(@PathVariable Long idPessoa, @RequestBody Pessoa pessoa) {
         pessoaService.EditarPessoa(pessoa, idPessoa);
         return ResponseEntity.ok(pessoa);
     }
-  
 
-   
-    
+    // public Iterable<Pessoa> buscarTodos()
+    @GetMapping
+    public ResponseEntity<Iterable<Pessoa>> buscarTodos() {
+        return ResponseEntity.ok(pessoaService.buscarTodos());
+    }
+
+    // public Pessoa consultarPessoaPorId(Long idPessoa)
+    @GetMapping("/id/{idPessoa}")
+    public ResponseEntity<Pessoa> consultarPessoaPorId(@PathVariable Long idPessoa) {
+        return ResponseEntity.ok(pessoaService.consultarPessoaPorId(idPessoa));
+    }
+
+    // public void criarEnderecoPessoa(Long idPessoa, Endereco endereco)
+
+    /// public void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco)
+
+    // public List<Endereco> listarEnderecoPessoa(Long idPessoa)
+
 }
