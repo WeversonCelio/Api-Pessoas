@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.weverson.api.pessoas.model.Endereco;
 import com.weverson.api.pessoas.model.Pessoa;
 import com.weverson.api.pessoas.service.PessoaService;
 
@@ -55,9 +56,25 @@ public class PessoaRestController {
     }
 
     // public void criarEnderecoPessoa(Long idPessoa, Endereco endereco)
+        @PostMapping("endereco/{idPessoa}")
+        public ResponseEntity<Endereco> criarEnderecoPessoa(@PathVariable Long idPessoa, @RequestBody Endereco endereco) {
+            pessoaService.criarEnderecoPessoa(idPessoa, endereco);
+            return ResponseEntity.ok(endereco);
+        }
 
-    /// public void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco)
+         // public List<Endereco> listarEnderecoPessoa(Long idPessoa)
+    @GetMapping("endereco/{idPessoa}")
+    public ResponseEntity<Iterable<Endereco>> listarEnderecoPessoa(@PathVariable Long idPessoa) {
+        return ResponseEntity.ok(pessoaService.listarEnderecoPessoa(idPessoa));
+    }
 
-    // public List<Endereco> listarEnderecoPessoa(Long idPessoa)
+    /// void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco);
+    @PutMapping("endereco/{IdPessoa}/{IdEndereco}")
+    public ResponseEntity<Iterable<Endereco>> alterarEnderecoPrincipal(@PathVariable Long IdPessoa, @PathVariable Long IdEndereco){
+        pessoaService.alterarEnderecoPrincipal(IdPessoa,IdEndereco );
+        return ResponseEntity.ok(pessoaService.listarEnderecoPessoa(IdPessoa));
+    } 
+
+   
 
 }

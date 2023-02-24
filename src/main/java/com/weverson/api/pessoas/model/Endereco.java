@@ -24,7 +24,7 @@ public class Endereco {
 
     private String cep;
     private String logradouro;
-    private String numero;
+    private Integer numero;
     private String cidade;
     private Boolean enderecoPrincipal;
 
@@ -55,11 +55,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public String getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

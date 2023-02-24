@@ -20,9 +20,8 @@ Iterable<Pessoa> buscarTodos();
 
 //*Criar endereço para pessoa */ 
 void criarEnderecoPessoa(Long idPessoa, Endereco endereco);
+
 //* Listar endereços da pessoa*/ 
-
-
 Iterable<Endereco> listarEnderecoPessoa(Long idPessoa);
 
 //*  Poder informar qual endereço é o principal da pessoa  */

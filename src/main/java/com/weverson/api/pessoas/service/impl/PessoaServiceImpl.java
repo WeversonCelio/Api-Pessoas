@@ -1,7 +1,6 @@
 package com.weverson.api.pessoas.service.impl;
 
-import java.util.Iterator;
-import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import com.weverson.api.pessoas.model.Pessoa;
 import com.weverson.api.pessoas.model.PessoaRepository;
 import com.weverson.api.pessoas.service.PessoaService;
 
-import net.bytebuddy.asm.Advice.Return;
+
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
@@ -52,28 +51,41 @@ public class PessoaServiceImpl implements PessoaService {
         return pessoa;
     }
 
-  
-
-    @Override
-    public void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco) {
-       // Optional<Pessoa> pessoaBd = pessoaRepository.findById(idPessoa);
-
-    }
 
     @Override
     public void criarEnderecoPessoa(Long idPessoa, Endereco endereco) {
-        // Pessoa pessoa = consultarPessoaPorId(idPessoa);
-        // List<Endereco> listarEnderecoPessoa = listarEnderecoPessoa(idPessoa);
-        // listarEnderecoPessoa.add(endereco);
-        // pessoa.setEndereco(listarEnderecoPessoa);
-        // EditarPessoa(pessoa, idPessoa);
+        Pessoa pessoa = pessoaRepository.findById(idPessoa).get();
+        endereco.setPessoa(pessoa);
+        enderecoRepository.save(endereco);
+
     }
 
     @Override
-    public List<Endereco> listarEnderecoPessoa(Long idPessoa) {
-      // Pessoa pessoa = consultarPessoaPorId(idPessoa);
-      //  return pessoa.getEndereco();
-      return null;
+    public Iterable<Endereco> listarEnderecoPessoa(Long idPessoa) {
+        Pessoa pessoa = pessoaRepository.findById(idPessoa).get();
+    Iterable<Endereco> enderecos = enderecoRepository.findByPessoa(pessoa);
+      return enderecos;
+
+    }
+
+    @Override
+    public void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco) {
+        Iterable<Endereco> listarEnderecoPessoa = listarEnderecoPessoa( idPessoa);
+        for (Endereco e : listarEnderecoPessoa) {
+            if(e.getEnderecoPrincipal().booleanValue()==true){
+                e.setEnderecoPrincipal(false);
+                enderecoRepository.save(e);
+
+            }
+            if(e.getIdEndereco().longValue()==idEndereco){
+                e.setEnderecoPrincipal(true);
+                enderecoRepository.save(e);
+            }  
+        }
+
+        
+
+
 
     }
 
