@@ -1,11 +1,14 @@
 package com.weverson.api.pessoas.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 
@@ -16,7 +19,9 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long IdPessoa;
     private String nome;
-    private Date dataNascimento;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataNascimento;
 
 
 
@@ -40,15 +45,14 @@ public class Pessoa {
     }
 
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-
-
+    
 }
