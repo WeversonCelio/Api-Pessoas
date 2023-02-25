@@ -3,7 +3,6 @@ package com.weverson.api.pessoas.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import java.time.LocalDate;
 import java.util.Optional;
 

@@ -1,5 +1,6 @@
 package com.weverson.api.pessoas.service.impl;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,17 +88,15 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Override
     public void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco) {
-        Optional<Endereco> endereco = enderecoRepository.findById(idEndereco);
         Iterable<Endereco> listarEnderecoPessoa = listarEnderecoPessoa(idPessoa);
-        if (endereco.isPresent()) {
-            for (Endereco e : listarEnderecoPessoa) {
-                if (e.getEnderecoPrincipal().booleanValue() == true) {
-                    e.setEnderecoPrincipal(false);
-                    enderecoRepository.save(e);
 
-                }
+        if (proprietariaEndereco(idEndereco, listarEnderecoPessoa)) {
+            for (Endereco e : listarEnderecoPessoa) {
                 if (e.getIdEndereco().longValue() == idEndereco) {
                     e.setEnderecoPrincipal(true);
+                    enderecoRepository.save(e);
+                } else if (e.getEnderecoPrincipal().booleanValue() == true) {
+                    e.setEnderecoPrincipal(false);
                     enderecoRepository.save(e);
                 }
             }
@@ -105,6 +104,16 @@ public class PessoaServiceImpl implements PessoaService {
             throw new idNaoEncontradoException(idEndereco, "idEndereco");
         }
 
+    }
+
+    private boolean proprietariaEndereco(Long idEndereco, Iterable<Endereco> listarEnderecoPessoa) {
+        Iterator<Endereco> iterator = listarEnderecoPessoa.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getIdEndereco() == idEndereco) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

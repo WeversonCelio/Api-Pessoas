@@ -34,10 +34,10 @@
 * Nome
 * Data de nascimento
 * Endereço:
-* Logradouro
-* CEP
-* Número
-* Cidade
+  * Logradouro
+  * CEP
+  * Número
+  * Cidade
 
 ## Requisitos  
 

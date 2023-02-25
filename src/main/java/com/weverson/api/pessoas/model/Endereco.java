@@ -1,26 +1,20 @@
 package com.weverson.api.pessoas.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
 @Entity
 public class Endereco {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long IdEndereco;
 
-    
     // @ManyToOne(cascade = CascadeType.ALL)
-	// private Usuario usuario;
-
+    // private Usuario usuario;
 
     private String cep;
     private String logradouro;
@@ -87,6 +81,4 @@ public class Endereco {
         this.pessoa = pessoa;
     }
 
-    
-    
 }

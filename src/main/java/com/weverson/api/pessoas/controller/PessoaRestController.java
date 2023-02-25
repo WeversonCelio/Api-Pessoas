@@ -14,14 +14,6 @@ import com.weverson.api.pessoas.model.Endereco;
 import com.weverson.api.pessoas.model.Pessoa;
 import com.weverson.api.pessoas.service.PessoaService;
 
-// * Criar uma pessoa
-// * Editar uma pessoa
-// * Consultar uma pessoa
-// * Listar pessoas
-// * Criar endereço para pessoa
-// * Listar endereços da pessoa
-// * Poder informar qual endereço é o principal da pessoa  
-
 @RestController
 @RequestMapping("pessoas")
 public class PessoaRestController {
@@ -29,52 +21,51 @@ public class PessoaRestController {
     @Autowired
     private PessoaService pessoaService;
 
-    // public void criarPessoa(Pessoa pessoa) {
+    // Criar uma pessoa
     @PostMapping
     public ResponseEntity<Pessoa> criarPessoa(@RequestBody Pessoa pessoa) {
         pessoaService.criarPessoa(pessoa);
         return ResponseEntity.ok(pessoa);
     }
 
-    // public void EditarPessoa(Pessoa pessoa, Long idPessoa) {
+    // Editar uma pessoa
     @PutMapping("/{idPessoa}")
     public ResponseEntity<Pessoa> EditarPessoa(@PathVariable Long idPessoa, @RequestBody Pessoa pessoa) {
         pessoaService.EditarPessoa(pessoa, idPessoa);
         return ResponseEntity.ok(pessoa);
     }
 
-    // public Iterable<Pessoa> buscarTodos()
+    // Listar pessoas
     @GetMapping
     public ResponseEntity<Iterable<Pessoa>> buscarTodos() {
         return ResponseEntity.ok(pessoaService.buscarTodos());
     }
 
-    // public Pessoa consultarPessoaPorId(Long idPessoa)
+    // Consultar uma pessoa
     @GetMapping("/{idPessoa}")
     public ResponseEntity<Pessoa> consultarPessoaPorId(@PathVariable Long idPessoa) {
         return ResponseEntity.ok(pessoaService.consultarPessoaPorId(idPessoa));
     }
 
-    // public void criarEnderecoPessoa(Long idPessoa, Endereco endereco)
-        @PostMapping("endereco/{idPessoa}")
-        public ResponseEntity<Endereco> criarEnderecoPessoa(@PathVariable Long idPessoa, @RequestBody Endereco endereco) {
-            pessoaService.criarEnderecoPessoa(idPessoa, endereco);
-            return ResponseEntity.ok(endereco);
-        }
+    // Criar endereço para pessoa
+    @PostMapping("endereco/{idPessoa}")
+    public ResponseEntity<Endereco> criarEnderecoPessoa(@PathVariable Long idPessoa, @RequestBody Endereco endereco) {
+        pessoaService.criarEnderecoPessoa(idPessoa, endereco);
+        return ResponseEntity.ok(endereco);
+    }
 
-         // public List<Endereco> listarEnderecoPessoa(Long idPessoa)
+    // Listar endereços da pessoa
     @GetMapping("endereco/{idPessoa}")
     public ResponseEntity<Iterable<Endereco>> listarEnderecoPessoa(@PathVariable Long idPessoa) {
         return ResponseEntity.ok(pessoaService.listarEnderecoPessoa(idPessoa));
     }
 
-    /// void alterarEnderecoPrincipal(Long idPessoa, Long idEndereco);
+    /// informar endereço principal da pessoa
     @PutMapping("endereco/{IdPessoa}/{IdEndereco}")
-    public ResponseEntity<Iterable<Endereco>> alterarEnderecoPrincipal(@PathVariable Long IdPessoa, @PathVariable Long IdEndereco){
-        pessoaService.alterarEnderecoPrincipal(IdPessoa,IdEndereco );
+    public ResponseEntity<Iterable<Endereco>> alterarEnderecoPrincipal(@PathVariable Long IdPessoa,
+            @PathVariable Long IdEndereco) {
+        pessoaService.alterarEnderecoPrincipal(IdPessoa, IdEndereco);
         return ResponseEntity.ok(pessoaService.listarEnderecoPessoa(IdPessoa));
-    } 
-
-   
+    }
 
 }
