@@ -50,7 +50,7 @@ public class PessoaRestController {
     }
 
     // public Pessoa consultarPessoaPorId(Long idPessoa)
-    @GetMapping("/id/{idPessoa}")
+    @GetMapping("/{idPessoa}")
     public ResponseEntity<Pessoa> consultarPessoaPorId(@PathVariable Long idPessoa) {
         return ResponseEntity.ok(pessoaService.consultarPessoaPorId(idPessoa));
     }
